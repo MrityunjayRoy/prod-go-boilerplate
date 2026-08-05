@@ -1,11 +1,11 @@
 package logger
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"os"
 	"time"
-	"encoding/json"
 
 	"github.com/MrityunjayRoy/prod-go-boilerplate/internal/config"
 	"github.com/newrelic/go-agent/v3/integrations/logcontext-v2/zerologWriter"
@@ -145,7 +145,7 @@ func WithTraceContext(logger zerolog.Logger, txn *newrelic.Transaction) zerolog.
 
 func NewPgxLogger(level zerolog.Level) zerolog.Logger {
 	writer := zerolog.ConsoleWriter{
-		Out: os.Stdout,
+		Out:        os.Stdout,
 		TimeFormat: "2006-01-02 15:04:05",
 		FormatFieldValue: func(i any) string {
 			switch v := i.(type) {

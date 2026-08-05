@@ -9,16 +9,15 @@ import (
 	"github.com/knadh/koanf/providers/env"
 	"github.com/knadh/koanf/v2"
 	"github.com/rs/zerolog"
-
 )
 
 type Config struct {
-	Primary  		Primary        		 `koanf:"primary" validate:"required"`
-	Server   		ServerConfig   		 `koanf:"server" validate:"required"`
-	Database 		DatabaseConfig 		 `koanf:"database" validate:"required"`
-	Redis	 		RedisConfig			 `koanf:"redis" validate:"required"`
-	Auth     		AuthConfig     		 `koanf:"auth" validate:"required"`
-	Observability 	*ObservabilityConfig `koanf:"cbservability" validate:"required"`
+	Primary       Primary              `koanf:"primary" validate:"required"`
+	Server        ServerConfig         `koanf:"server" validate:"required"`
+	Database      DatabaseConfig       `koanf:"database" validate:"required"`
+	Redis         RedisConfig          `koanf:"redis" validate:"required"`
+	Auth          AuthConfig           `koanf:"auth" validate:"required"`
+	Observability *ObservabilityConfig `koanf:"cbservability" validate:"required"`
 }
 
 type Primary struct {
@@ -58,11 +57,11 @@ func LoadConfig() (*Config, error) {
 	logger := zerolog.New(zerolog.ConsoleWriter{Out: os.Stderr}).With().Timestamp().Logger()
 
 	k := koanf.New(".")
-	
-	/* 
-	prefixing the env varaible because when depolying
-	to different servers( or OS) and other envs are present
-	they can start overloading each other
+
+	/*
+		prefixing the env varaible because when depolying
+		to different servers( or OS) and other envs are present
+		they can start overloading each other
 	*/
 	err := k.Load(env.Provider("BOILERPLATE_", ".", func(s string) string {
 		return strings.ToLower(strings.TrimPrefix(s, "BOILERPLATE_"))

@@ -7,27 +7,27 @@ import (
 	"github.com/hibiken/asynq"
 )
 
-const(
+const (
 	TaskWelcome = "email:welome"
 )
 
 type WelcomeEmailPayload struct {
-	To string `json:"to"`
+	To        string `json:"to"`
 	FirstName string `json:"first_name"`
 }
 
 func NewWelcomeEmailTas(to, firstName string) (*asynq.Task, error) {
 	payload, err := json.Marshal(WelcomeEmailPayload{
-		To: to,
+		To:        to,
 		FirstName: firstName,
 	})
-	if err != nil{
+	if err != nil {
 		return nil, err
 	}
 
-	return asynq.NewTask(TaskWelcome,payload,
-asynq.MaxRetry(3),
-asynq.Queue("default"),
-asynq.Timeout(30*time.Second)), nil
+	return asynq.NewTask(TaskWelcome, payload,
+		asynq.MaxRetry(3),
+		asynq.Queue("default"),
+		asynq.Timeout(30*time.Second)), nil
 
 }

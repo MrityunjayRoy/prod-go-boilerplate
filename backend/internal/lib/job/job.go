@@ -25,8 +25,8 @@ func NewJobService(logger *zerolog.Logger, cfg *config.Config) *JobService {
 			Concurrency: 10,
 			Queues: map[string]int{
 				"critical": 6,
-				"default": 3,
-				"low": 1,
+				"default":  3,
+				"low":      1,
 			},
 		},
 	)
@@ -47,12 +47,11 @@ func (j *JobService) Start() error {
 		return err
 	}
 
-
 	return nil
 }
 
-func (j *JobService) Stop(){
+func (j *JobService) Stop() {
 	j.logger.Info().Msg("Stopping background job service")
 	j.server.Shutdown()
-	j.Client.Close() 
+	j.Client.Close()
 }

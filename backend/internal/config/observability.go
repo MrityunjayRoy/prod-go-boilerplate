@@ -34,25 +34,25 @@ type HealthChecksConfig struct {
 }
 
 func DefaultObservabilityConfig() *ObservabilityConfig {
-	return &ObservabilityConfig {
+	return &ObservabilityConfig{
 		ServiceName: "boilerplate",
 		Environment: "developement",
 		Logging: LoggingConfig{
-			Level: "info",
-			Format: "json",
+			Level:              "info",
+			Format:             "json",
 			SlowQueryThreshold: 100 * time.Millisecond,
 		},
 		NewRelic: NewRelicConfig{
-			LicenseKey: "",
-			AppLogForwardingEnabled: true,
+			LicenseKey:                "",
+			AppLogForwardingEnabled:   true,
 			DistributedTracingEnabled: true,
-			DebugLogging: false,
+			DebugLogging:              false,
 		},
 		HealthChecks: HealthChecksConfig{
-			Enabled: true,
+			Enabled:  true,
 			Interval: 30 * time.Second,
-			Timeout: 5 * time.Second,
-			Checks: []string{"database", "redis"},
+			Timeout:  5 * time.Second,
+			Checks:   []string{"database", "redis"},
 		},
 	}
 }
@@ -62,7 +62,7 @@ func (c *ObservabilityConfig) Validate() error {
 		return fmt.Errorf("service name is required")
 	}
 
-	validlevels := map[string]bool {
+	validlevels := map[string]bool{
 		"debug": true,
 		"info":  true,
 		"warn":  true,
@@ -72,7 +72,7 @@ func (c *ObservabilityConfig) Validate() error {
 		return fmt.Errorf("invalid logging level: %s (must be one of: debug, info, warn, error", c.Logging.Level)
 	}
 
-	if c.Logging.SlowQueryThreshold < 0{
+	if c.Logging.SlowQueryThreshold < 0 {
 		return fmt.Errorf("logging slow_query_threshold must be non-negative")
 	}
 

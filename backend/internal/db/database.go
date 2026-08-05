@@ -20,7 +20,7 @@ import (
 
 type Database struct {
 	Pool *pgxpool.Pool
-	log *zerolog.Logger
+	log  *zerolog.Logger
 }
 
 type multiTracer struct {
@@ -28,7 +28,7 @@ type multiTracer struct {
 }
 
 const DatabasePingTimeout = 10
-	
+
 func (mt *multiTracer) TraceQueryStart(ctx context.Context, conn *pgx.Conn, data pgx.TraceQueryStartData) context.Context {
 	for _, tracer := range mt.tracers {
 		if t, ok := tracer.(interface {
@@ -73,22 +73,22 @@ func New(cfg *config.Config, logger *zerolog.Logger, loggerService *loggerConfig
 		pgxPoolConfig.ConnConfig.Tracer = nrpgx5.NewTracer()
 	}
 
-	if cfg.Primary.Env == "local"{
+	if cfg.Primary.Env == "local" {
 		globalLevel := logger.GetLevel()
 		pgxLogger := loggerConfig.NewPgxLogger(globalLevel)
 
 		if pgxPoolConfig.ConnConfig.Tracer != nil {
 			// If new relic tracer exists, create a multi-tracer
 			localTracer := &tracelog.TraceLog{
-				Logger: pgxzero.NewLogger(pgxLogger),
+				Logger:   pgxzero.NewLogger(pgxLogger),
 				LogLevel: tracelog.LogLevel(loggerConfig.GetPgxTraceLevel(globalLevel)),
 			}
 			pgxPoolConfig.ConnConfig.Tracer = &multiTracer{
 				tracers: []any{pgxPoolConfig.ConnConfig.Tracer, localTracer},
 			}
-		}else {
+		} else {
 			pgxPoolConfig.ConnConfig.Tracer = &tracelog.TraceLog{
-				Logger: pgxzero.NewLogger(pgxLogger),
+				Logger:   pgxzero.NewLogger(pgxLogger),
 				LogLevel: tracelog.LogLevel(loggerConfig.GetPgxTraceLevel(globalLevel)),
 			}
 		}
@@ -101,7 +101,7 @@ func New(cfg *config.Config, logger *zerolog.Logger, loggerService *loggerConfig
 
 	database := &Database{
 		Pool: pool,
-		log: logger,
+		log:  logger,
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), DatabasePingTimeout*time.Second)

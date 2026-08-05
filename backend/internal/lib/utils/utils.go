@@ -11,5 +11,5 @@ func PrintJSON(v interface{}) {
 		fmt.Println("Error marshalling the json:", err)
 	}
 
-	fmt.Println("JSON:",string(json))
+	fmt.Println("JSON:", string(json))
 }
