@@ -12,6 +12,8 @@ require (
 	github.com/knadh/koanf/providers/env v1.1.0
 	github.com/knadh/koanf/v2 v2.3.0
 	github.com/newrelic/go-agent/v3/integrations/nrpgx5 v1.3.4
+	github.com/newrelic/go-agent/v3/integrations/nrredis-v9 v1.1.2
+	github.com/redis/go-redis/v9 v9.14.1
 	github.com/rs/zerolog v1.34.0
 )
 
@@ -29,7 +31,6 @@ require (
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
 	github.com/newrelic/go-agent/v3/integrations/logcontext-v2/nrwriter v1.0.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/redis/go-redis/v9 v9.14.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/spf13/cast v1.10.0 // indirect
