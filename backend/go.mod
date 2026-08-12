@@ -5,6 +5,7 @@ go 1.25.5
 require (
 	github.com/clerk/clerk-sdk-go/v2 v2.7.0
 	github.com/go-playground/validator/v10 v10.30.1
+	github.com/google/uuid v1.6.0
 	github.com/hibiken/asynq v0.26.0
 	github.com/jackc/pgx-zerolog v0.0.0-20230315001418-f978528409eb
 	github.com/jackc/pgx/v5 v5.10.0
@@ -13,7 +14,9 @@ require (
 	github.com/knadh/koanf/providers/env v1.1.0
 	github.com/knadh/koanf/v2 v2.3.0
 	github.com/labstack/echo/v4 v4.15.4
+	github.com/newrelic/go-agent/v3/integrations/nrecho-v4 v1.1.5
 	github.com/newrelic/go-agent/v3/integrations/nrpgx5 v1.3.4
+	github.com/newrelic/go-agent/v3/integrations/nrpkgerrors v1.1.0
 	github.com/newrelic/go-agent/v3/integrations/nrredis-v9 v1.1.2
 	github.com/redis/go-redis/v9 v9.14.1
 	github.com/rs/zerolog v1.34.0
@@ -27,7 +30,6 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/go-jose/go-jose/v3 v3.0.4 // indirect
-	github.com/google/uuid v1.6.0 // indirect
 	github.com/huandu/xstrings v1.5.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
